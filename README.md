@@ -1,15 +1,15 @@
 # CPU_Power_Modelling
-# Power Modelling of ARM Cortex-A57 CPU on NVIDIA Jetson TX1
+# Power Modelling of ARM Cortex-A57 CPU on NVIDIA Jetson Nano
 
 *******************************************************************************
-# Step 1: Data Collection (Requires NVIDIA Jetson TX1)
+# Step 1: Data Collection (Requires NVIDIA Jetson Nano)
 1)  Go to Data_Collection/
 2)  Run the makefile to compile the files: 
             make -f Makefile_cpu cpu_pow
 4)  Run executable to start the benchmark run and collect data: 
             sudo ./pmon_cpu
 5)  Raw data file is dumped: 
-            power_measurement_log_a57.dat
+            data_store.dat
 *******************************************************************************
 
 # Step 2: Post Processing (Offline)
@@ -53,7 +53,7 @@ CREDITS:
 1)  Dr Jose Nunez Yanez, Department of Electrical and Electronic Engineering, University of Bristol
 2)  Dr Kris Nikov, Department of Computer Science, University of Bristol
 
-This project work serves as an extension to the work carried out by Dr Jose Nunez-Yanez
+This project work serves as an extension to the work carried out on the NVIDIA Jetson boards by Dr Jose Nunez-Yanez
 and Dr Kris Nikov in their published work for the Maxwell GPU on Jetson TX1:
 
 "Run-Time Power Modelling in Embedded GPUs with Dynamic Voltage and Frequency 
