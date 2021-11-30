@@ -34,8 +34,8 @@
 
 ***********************************************************************************
 
-# Step 3: Power Modeling and Validation
-1)  Go to ModelingAndValidation/
+# Step 3: Power Modelling and Validation
+1)  Go to ModellingAndValidation/
 2)  Ensure the following files are present in the directory:
 	   build_model.m,
 	   load_build_model.m,
@@ -66,7 +66,7 @@ United Kingdom
 
 REFERENCES:
 1)  GPU Power Model: https://github.com/kranik/ARMPM_BUILDMODEL/tree/GPU_tx1
-2)  Original Modeling scripts adopted from Dr Kris Nikov's Doctoral Thesis
+2)  Original Modelling scripts adopted from Dr Kris Nikov's Doctoral Thesis
     project: https://github.com/kranik/ARMPM_BUILDMODEL/tree/master
 3)  Kris Nikov. Robust Energy and Power Predictor Selection. url: 
     https://github.com/TSL-UOB/TP-REPPS
