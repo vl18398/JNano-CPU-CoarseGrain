@@ -3,7 +3,7 @@
 
 *******************************************************************************
 # Step 1: Data Collection (Requires NVIDIA Jetson Nano)
-1)  Go to Data_Collection/
+1)  Go to DataCollection/
 2)  Run the makefile to compile the files: 
             make -f Makefile_cpu cpu_pow
 4)  Run executable to start the benchmark run and collect data: 
@@ -15,7 +15,7 @@
 # Step 2: Post Processing (Offline)
 1)  Transfer the raw data file (.dat) obtained in step 1 onto another machine 
     which can run python3.6 and bash scripts.
-2)  Go to Post_Processing/
+2)  Go to PostProcessing/
 3)  Run the step which splits the .dat file into individual BM+Freq logs using: 
             python3.6 splitter_freq.py power_measurement_log_a57.dat
 4)  Merge the files obtained in step-3 into a global log using: 	
@@ -35,7 +35,7 @@
 ***********************************************************************************
 
 # Step 3: Power Modeling and Validation
-1)  Go to Modeling_and_Validation
+1)  Go to ModelingAndValidation/
 2)  Ensure the following files are present in the directory:
 	   build_model.m,
 	   load_build_model.m,
