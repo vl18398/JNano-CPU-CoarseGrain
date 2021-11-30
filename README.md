@@ -1,4 +1,4 @@
-# CPU_Power_Modelling
+# JNano-CPU-CoarseGrain
 # Power Modelling of ARM Cortex-A57 CPU on NVIDIA Jetson Nano
 
 *******************************************************************************
