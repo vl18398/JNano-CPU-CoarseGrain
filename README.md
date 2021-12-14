@@ -17,7 +17,7 @@
     which can run python3.6 and bash scripts.
 2)  Go to PostProcessing/
 3)  Run the step which splits the .dat file into individual BM+Freq logs using: 
-            python3.6 splitter_freq.py power_measurement_log_a57.dat
+            python3.6 splitter_freq.py data_store.dat
 4)  Merge the files obtained in step-3 into a global log using: 	
 	    python3.6 global_merger_nvidia.py
 6)  To complete steps 3 & 4, there are separate targets within the
