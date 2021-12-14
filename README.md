@@ -52,16 +52,11 @@
 CREDITS:
 1)  Dr Jose Nunez Yanez, Department of Electrical and Electronic Engineering, University of Bristol
 2)  Dr Kris Nikov, Department of Computer Science, University of Bristol
+3)  Varun Anand, MSc Microelectronics student, University of Bristol
 
 This project work serves as an extension to the work carried out on the NVIDIA Jetson boards by Dr Jose Nunez-Yanez
-and Dr Kris Nikov in their published work for the Maxwell GPU on Jetson TX1:
-
-"Run-Time Power Modelling in Embedded GPUs with Dynamic Voltage and Frequency 
-Scaling" published in the PARMA-DITAM 2020 as part of the HIPEAC conference.
-Authors: Jose Nunez-Yanez, Kris Nikov, Kerstin Eder, Mohammad Hosseinabady
-Department of Electrical and Electronic Engineering, University of Bristol, 
-United Kingdom
-
+and Dr Kris Nikov with their published work for the Maxwell GPU on Jetson TX1.
+It also leads on from the work completed by MSc student Varun Anand, for the ARM Cortex-A57 CPU.
 *********************************************************************************
 
 REFERENCES:
