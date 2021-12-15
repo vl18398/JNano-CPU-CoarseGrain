@@ -1,0 +1,156 @@
+# Author: Matthew Burgess 
+# Post processing of data retrieval for NVIDIA Jetson Nano
+#
+# File : Makefile_split_and_merge
+#
+# This Makefile helps automate the process of: 
+# 1: Creating separate directories for each benchmark type (rodinia, nvidia, parsec)
+# 2. Creating seperate files for each frequency
+# 3: Creating global merged logs
+# 4: Copy merged log to "run" directory to combine with TEST BM merged log
+
+
+# Creates all folders for rodinia, nvidia and parsec benchmarks, and post run directory for merging
+create_all_folders: create_rodinia_folders create_nvidia_folders create_parsec_folders create_post_run_dirs
+
+create_rodinia_folders:	dir_rodinia
+create_nvidia_folders:	dir_nvidia 
+create_parsec_folders:	dir_parsec
+create_post_run_dirs:	create_run_dir 
+
+# Commands to create directory
+create_all_dir: dir_rodinia dir_nvidia dir_parsec create_run_dir
+
+
+
+# Cleans all folders for rodinia, nvidia and parsec benchmarks, and post run directory for merging
+clean_all_dirs: clean_rodinia_dirs clean_nvidia_dirs clean_parsec_dirs clean_run_dirs
+
+clean_rodinia_dirs: clean_run_rodinia 
+clean_nvidia_dirs: clean_run_nvidia
+clean_parsec_dirs: clean_run_parsec
+clean_run_dirs: clean_run_dir 
+
+# Commands to clean directory
+clean_all_dir: clean_run_rodinia clean_run_nvidia clean_run_parsec clean_run_dir
+
+
+
+##############################RODINIA##############################
+# Define variable to hold global merger python script
+MERGER_SCRIPT_R0 := global_merger_rodinia.py
+
+# Define variable to hold path of global merger python script
+MERGER_SCRIPT_R0_PATH := $(shell readlink -f $(MERGER_SCRIPT_R0))
+
+
+# Define Filenames for each .dat file
+FILE_R0 := data_store_rodinia.dat
+
+# Define variables to hold path for all .dat files
+FILEPATH_R0 := $(shell readlink -f $(FILE_R0))
+
+# Create directory to split and merge data files
+dir_rodinia:
+	mkdir run_rodinia;\
+	cd run_rodinia;\
+	cp -r $(FILEPATH_R0) .;\
+	cd ..;\
+	# Splitting .dat into individual BM+freq logs
+	python3 splitter_freq.py $(FILE_R0) run_rodinia;\
+	# Merging all BM+freq into one global merged log
+	python3 $(MERGER_SCRIPT_R0) run_rodinia rodinia;\
+	# Copy file onto a separate folder to combine with TEST BM merged log
+	cp -r run_rodinia/power_measurement_merged_global.txt power_measurement_merged_global_r0.txt
+
+# Command to delete directory created during previous run
+clean_run_rodinia:
+	rm -rf run_rodinia
+##############################RODINIA##############################
+
+
+
+##############################NVIDIA###############################
+# Define variable to hold global merger python script
+MERGER_SCRIPT_N0 := global_merger_nvidia.py
+
+# Define variable to hold path of global merger python script
+MERGER_SCRIPT_N0_PATH := $(shell readlink -f $(MERGER_SCRIPT_N0))
+
+
+# Define Filenames for each .dat file
+FILE_N0 := data_store_nvidia.dat
+
+# Define variables to hold path for all .dat files
+FILEPATH_N0 := $(shell readlink -f $(FILE_N0))
+
+# Create directory to split and merge data files
+dir_nvidia:
+	mkdir run_nvidia;\
+	cd run_nvidia;\
+	cp -r $(FILEPATH_N0) .;\
+	cd ..;\
+	# Splitting .dat into individual BM+freq logs
+	python3 splitter_freq.py $(FILE_N0) run_nvidia;\
+	# Merging all BM+freq into one global merged log
+	python3 $(MERGER_SCRIPT_N0) run_nvidia nvidia;\
+	# Copy file onto a separate folder to combine with TEST BM merged log
+	cp -r run_nvidia/power_measurement_merged_global.txt power_measurement_merged_global_n0.txt
+
+# Command to delete directory created during previous run
+clean_run_nvidia:
+	rm -rf run_nvidia
+##############################NVIDIA###############################
+
+
+
+##############################PARSEC###############################
+# Define variable to hold global merger python script
+MERGER_SCRIPT_P0 := global_merger_parsec.py
+
+# Define variable to hold path of global merger python script
+MERGER_SCRIPT_P0_PATH := $(shell readlink -f $(MERGER_SCRIPT_P0))
+
+
+# Define Filenames for each .dat file
+FILE_P0 := data_store_parsec.dat
+
+# Define variables to hold path for all .dat files
+FILEPATH_P0 := $(shell readlink -f $(FILE_P0))
+
+# Create directory to split and merge data files
+dir_parsec:
+	mkdir run_parsec;\
+	cd run_parsec;\
+	cp -r $(FILEPATH_P0) .;\
+	cd ..;\
+	# Splitting .dat into individual BM+freq logs
+	python3 splitter_freq.py $(FILE_P0) run_parsec;\
+	# Merging all BM+freq into one global merged log
+	python3 $(MERGER_SCRIPT_P0) run_parsec parsec;\
+	# Copy file onto a separate folder to combine with TEST BM merged log
+	cp -r run_parsec/power_measurement_merged_global.txt power_measurement_merged_global_p0.txt
+
+# Command to delete directory created during previous run
+clean_run_parsec:
+	rm -rf run_parsec
+##############################PARSEC###############################
+
+
+
+# Create separate directory to merge test and train BM logs
+create_run_dir:
+	mkdir run;\
+	mv power_measurement_merged_global_n0.txt run/power_measurement_merged_global_n0.txt;\
+	mv power_measurement_merged_global_r0.txt run/power_measurement_merged_global_r0.txt;\
+	mv power_measurement_merged_global_p0.txt run/power_measurement_merged_global_p0.txt;\
+	echo "\n\t Merging Power Logs... \n";\
+	cd run;\
+	cp -r power_measurement_merged_global_r0.txt power_measurement_merged_global.txt;\
+	cat power_measurement_merged_global_n0.txt >> power_measurement_merged_global.txt;\
+	cat power_measurement_merged_global_p0.txt >> power_measurement_merged_global.txt;\
+	echo "\n\t Merging Power Logs...DONE \n";\
+
+clean_run_dir:
+	rm -rf run
+
