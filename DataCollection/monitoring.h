@@ -34,7 +34,7 @@ void power_monitoring_stop();
 void data_retrieval_blackscholes();
 void data_retrieval_dedup();
 void data_retrieval_freqmine();
-void data_retrieval_fruidanimate();
+void data_retrieval_fluidanimate();
 void data_retrieval_streamcluster();
 void data_retrieval_splash2x_barnes();
 void data_retrieval_splash2x_fft();

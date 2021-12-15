@@ -108,7 +108,7 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	}
 
 
-printf("\n\t\t -------------------fruidanimate-------------------\n");
+printf("\n\t\t -------------------fluidanimate-------------------\n");
 for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	{
 		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
@@ -117,17 +117,17 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 		system(cmdbuf);
 		
 
-		printf("\tLaunching config_fruidanimate.sh...\n");
-		system("./config_fruidanimate.sh"); 	//collect the PMU events
-		printf("\tFinished config_fruidanimate.sh...\n");
+		printf("\tLaunching config_fluidanimate.sh...\n");
+		system("./config_fluidanimate.sh"); 	//collect the PMU events
+		printf("\tFinished config_fluidanimate.sh...\n");
 
 		printf("\tLaunching PMU event transfer...\n");
 		config_transferPMUdata(); 		//transfer PMU events data
 		printf("\tFinished PMU event transfer...\n");
 
-		printf("\tLaunching data_retrieval_fruidanimate...\n");
-		data_retrieval_fruidanimate(); 		//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_fruidanimate...\n");
+		printf("\tLaunching data_retrieval_fluidanimate...\n");
+		data_retrieval_fluidanimate(); 		//collection the data of CPU freq,voltage,power,temperature
+		printf("\tFinished data_retrieval_fluidanimate...\n");
 
 		
 	}

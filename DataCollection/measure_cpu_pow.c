@@ -496,9 +496,9 @@ printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 }
 
 
-void data_retrieval_fruidanimate(){
+void data_retrieval_fluidanimate(){
 
-printf("\n\t\t -------------------now in data_retrieval_fruidanimate-------------------\n");
+printf("\n\t\t -------------------now in data_retrieval_fluidanimate-------------------\n");
 
 	char a57freq[100];
 	char a57temp[100];
@@ -557,7 +557,7 @@ printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 
 			cl_log = fopen("data_store.dat", "a");
 
-			fprintf(cl_log,"1\tfruidanimate\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+			fprintf(cl_log,"1\tfluidanimate\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
 
 			fflush(fp_log);
 		
