@@ -52,7 +52,7 @@
 CREDITS:
 1)  Dr Jose Nunez Yanez, Department of Electrical and Electronic Engineering, University of Bristol
 2)  Dr Kris Nikov, Department of Computer Science, University of Bristol
-3)  Varun Anand, MSc Microelectronics student, University of Bristol
+3)  Varun Anand, MSc Microelectronics Student, University of Bristol
 
 This project work serves as an extension to the work carried out on the NVIDIA Jetson boards by Dr Jose Nunez-Yanez
 and Dr Kris Nikov with their published work for the Maxwell GPU on Jetson TX1.
