@@ -158,7 +158,7 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	}
 
 
-printf("\n\t\t -------------------splash2x.barnes-------------------\n");
+printf("\n\t\t -------------------ferret-------------------\n");
 for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	{
 		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
@@ -167,23 +167,23 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 		system(cmdbuf);
 		
 
-		printf("\tLaunching config_splash2x.barnes.sh...\n");
-		system("./config_splash2x.barnes.sh"); 	//collect the PMU events
-		printf("\tFinished config_splash2x.barnes.sh...\n");
+		printf("\tLaunching config_ferret.sh...\n");
+		system("./config_ferret.sh"); 	//collect the PMU events
+		printf("\tFinished config_ferret.sh...\n");
 
 		printf("\tLaunching PMU event transfer...\n");
 		config_transferPMUdata(); 		//transfer PMU events data
 		printf("\tFinished PMU event transfer...\n");
 
-		printf("\tLaunching data_retrieval_splash2x.barnes...\n");
-		data_retrieval_splash2x_barnes(); 	//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_splash2x.barnes...\n");
+		printf("\tLaunching data_retrieval_ferret...\n");
+		data_retrieval_ferret(); 	//collection the data of CPU freq,voltage,power,temperature
+		printf("\tFinished data_retrieval_ferret...\n");
 
 		
 	}
 
 
-printf("\n\t\t -------------------splash2x.fft-------------------\n");
+printf("\n\t\t -------------------facesim-------------------\n");
 for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	{
 		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
@@ -192,17 +192,17 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 		system(cmdbuf);
 		
 
-		printf("\tLaunching config_splash2x.fft.sh...\n");
-		system("./config_splash2x.fft.sh"); 	//collect the PMU events
-		printf("\tFinished config_splash2x.fft.sh...\n");
+		printf("\tLaunching config_facesim.sh...\n");
+		system("./config_facesim.sh"); 	//collect the PMU events
+		printf("\tFinished config_facesim.sh...\n");
 
 		printf("\tLaunching PMU event transfer...\n");
 		config_transferPMUdata(); 		//transfer PMU events data
 		printf("\tFinished PMU event transfer...\n");
 
-		printf("\tLaunching data_retrieval_splash2x.fft...\n");
-		data_retrieval_splash2x_fft(); 		//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_splash2x.fft...\n");
+		printf("\tLaunching data_retrieval_facesim.fft...\n");
+		data_retrieval_facesim(); 		//collection the data of CPU freq,voltage,power,temperature
+		printf("\tFinished data_retrieval_facesim...\n");
 
 		
 	}

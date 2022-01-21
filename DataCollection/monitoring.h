@@ -36,8 +36,8 @@ void data_retrieval_dedup();
 void data_retrieval_freqmine();
 void data_retrieval_fluidanimate();
 void data_retrieval_streamcluster();
-void data_retrieval_splash2x_barnes();
-void data_retrieval_splash2x_fft();
+void data_retrieval_ferret();
+void data_retrieval_facesim();
 void config_transferPMUdata();
 
 #endif //__MONITORING__H__
