@@ -27,7 +27,7 @@ if (!fp_log) {
 	}
 
 	printf("\n\t\t -------------------1-------------------\n");
-	fprintf(fp_log, "#Timestamp\tBenchmark\tRun(#)\tCPU Frequency (MHz)\tCPU Temperature(C)\tVoltage[V]\tPower[W]\tMEM_ACCESS\tBR_MIS_PRED\tBR_PRED\tL1D_CACHE\tL1D_CACHE_REFILE\tL1I_TLB_REFILE\n");	//
+	fprintf(fp_log, "#Timestamp\tBenchmark\tRun(#)\tCPU Frequency (MHz)\tCPU Temperature(C)\tVoltage[V]\tPower[W]\tL1D_CACHE\tCPU_CYCLES\tL1I_CACHE\tBUS_CYCLES\tBUS_ACCESS_PERIPH\tBR_RETURN_SPEC\n");	//
 
 	fflush(fp_log);	
 	fclose(fp_log);
