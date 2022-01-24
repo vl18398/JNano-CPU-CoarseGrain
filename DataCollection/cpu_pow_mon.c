@@ -83,6 +83,56 @@ printf("\n\t\t -------------------dedup-------------------\n");
 	}
 
 
+printf("\n\t\t -------------------facesim-------------------\n");
+for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
+	{
+		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
+
+		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
+		system(cmdbuf);
+		
+
+		printf("\tLaunching config_facesim.sh...\n");
+		system("./config_facesim.sh"); 	//collect the PMU events
+		printf("\tFinished config_facesim.sh...\n");
+
+		printf("\tLaunching PMU event transfer...\n");
+		config_transferPMUdata(); 		//transfer PMU events data
+		printf("\tFinished PMU event transfer...\n");
+
+		printf("\tLaunching data_retrieval_facesim.fft...\n");
+		data_retrieval_facesim(); 		//collection the data of CPU freq,voltage,power,temperature
+		printf("\tFinished data_retrieval_facesim...\n");
+
+		
+	}
+
+
+printf("\n\t\t -------------------ferret-------------------\n");
+for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
+	{
+		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
+
+		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
+		system(cmdbuf);
+		
+
+		printf("\tLaunching config_ferret.sh...\n");
+		system("./config_ferret.sh"); 	//collect the PMU events
+		printf("\tFinished config_ferret.sh...\n");
+
+		printf("\tLaunching PMU event transfer...\n");
+		config_transferPMUdata(); 		//transfer PMU events data
+		printf("\tFinished PMU event transfer...\n");
+
+		printf("\tLaunching data_retrieval_ferret...\n");
+		data_retrieval_ferret(); 	//collection the data of CPU freq,voltage,power,temperature
+		printf("\tFinished data_retrieval_ferret...\n");
+
+		
+	}
+
+
 printf("\n\t\t -------------------freqmine-------------------\n");
 for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	{
@@ -158,54 +208,6 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	}
 
 
-printf("\n\t\t -------------------ferret-------------------\n");
-for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
-	{
-		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
-
-		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
-		system(cmdbuf);
-		
-
-		printf("\tLaunching config_ferret.sh...\n");
-		system("./config_ferret.sh"); 	//collect the PMU events
-		printf("\tFinished config_ferret.sh...\n");
-
-		printf("\tLaunching PMU event transfer...\n");
-		config_transferPMUdata(); 		//transfer PMU events data
-		printf("\tFinished PMU event transfer...\n");
-
-		printf("\tLaunching data_retrieval_ferret...\n");
-		data_retrieval_ferret(); 	//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_ferret...\n");
-
-		
-	}
-
-
-printf("\n\t\t -------------------facesim-------------------\n");
-for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
-	{
-		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
-
-		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
-		system(cmdbuf);
-		
-
-		printf("\tLaunching config_facesim.sh...\n");
-		system("./config_facesim.sh"); 	//collect the PMU events
-		printf("\tFinished config_facesim.sh...\n");
-
-		printf("\tLaunching PMU event transfer...\n");
-		config_transferPMUdata(); 		//transfer PMU events data
-		printf("\tFinished PMU event transfer...\n");
-
-		printf("\tLaunching data_retrieval_facesim.fft...\n");
-		data_retrieval_facesim(); 		//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_facesim...\n");
-
-		
-	}
 	printf("\tStarting Monitoring epilogue...\n");
 	power_monitoring_epilogue();
 	printf("\tMonitoring epilogue Done...\n");
