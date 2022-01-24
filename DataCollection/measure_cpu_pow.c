@@ -357,6 +357,142 @@ printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 }
 
 
+void data_retrieval_bodytrack(){
+
+printf("\n\t\t -------------------now in data_retrieval_bodytrack-------------------\n");
+
+	char a57freq[100];
+	char a57temp[100];
+	char a57bench[100];
+	char cpu_voltage[100];
+	char cpu_power[100];
+			
+			FILE *rate = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq","r");				// add path to the sysfs file to read the CPU clock
+			FILE *voltage = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage2_input","r");		// add path to the sysfs file to read CPU voltage
+			FILE *temp = fopen("/sys/devices/virtual/thermal/thermal_zone1/temp","r");					// add path to the sysfs file to read the CPU temperature
+			FILE *power = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power2_input","r");
+			
+
+			size_t elements_freq = fread(a57freq,1,20,rate);
+		
+			strtok(a57freq,"\n");
+
+			size_t elements_temp = fread(a57temp,1,20,temp);
+			strtok(a57temp,"\n");
+
+			size_t elements_volt = fread(cpu_voltage,1,20,voltage);
+			strtok(cpu_voltage,"\n");
+
+			size_t elements_power = fread(cpu_power,1,20,power);
+			strtok(cpu_power,"\n");
+			
+			fclose(rate);
+			fclose(temp);
+			fclose(voltage);
+			fclose(power);	
+	
+				int cpufreqMHz = atoi(a57freq)/1000;		// CPU freq in MHz
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU freq in MHz : %d \n",cpufreqMHz);
+
+				int cputempdeg = atoi(a57temp)/1000;		// CPU temp in degrees
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU temp in degrees : %d \n",cputempdeg);
+
+				float cpuvoltageV = atoi(cpu_voltage)/1000.0;	// CPU voltage in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU Voltage in V : %f \n",cpuvoltageV);
+
+				float cpuvoltageW = atoi(cpu_power)/1000.0;	// CPU power in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU power in W : %f \n",cpuvoltageW);
+
+			printf("\n\t\t PMU EVENT DATA TRANSFER\n");
+	char a[15][15];
+int i;
+
+FILE *jpp = fopen("config_read_hw_events.txt","r");
+for(i=0; !feof(jpp);i++){
+fscanf(jpp,"%s",&a[i]);
+
+}
+fclose(jpp);
+
+printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			cl_log = fopen("data_store.dat", "a");
+
+			fprintf(cl_log,"1\tbodytrack\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			fflush(fp_log);
+
+}
+
+
+void data_retrieval_canneal(){
+
+printf("\n\t\t -------------------now in data_retrieval_canneal-------------------\n");
+
+	char a57freq[100];
+	char a57temp[100];
+	char a57bench[100];
+	char cpu_voltage[100];
+	char cpu_power[100];
+			
+			FILE *rate = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq","r");				// add path to the sysfs file to read the CPU clock
+			FILE *voltage = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage2_input","r");		// add path to the sysfs file to read CPU voltage
+			FILE *temp = fopen("/sys/devices/virtual/thermal/thermal_zone1/temp","r");					// add path to the sysfs file to read the CPU temperature
+			FILE *power = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power2_input","r");
+			
+
+			size_t elements_freq = fread(a57freq,1,20,rate);
+		
+			strtok(a57freq,"\n");
+
+			size_t elements_temp = fread(a57temp,1,20,temp);
+			strtok(a57temp,"\n");
+
+			size_t elements_volt = fread(cpu_voltage,1,20,voltage);
+			strtok(cpu_voltage,"\n");
+
+			size_t elements_power = fread(cpu_power,1,20,power);
+			strtok(cpu_power,"\n");
+			
+			fclose(rate);
+			fclose(temp);
+			fclose(voltage);
+			fclose(power);	
+	
+				int cpufreqMHz = atoi(a57freq)/1000;		// CPU freq in MHz
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU freq in MHz : %d \n",cpufreqMHz);
+
+				int cputempdeg = atoi(a57temp)/1000;		// CPU temp in degrees
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU temp in degrees : %d \n",cputempdeg);
+
+				float cpuvoltageV = atoi(cpu_voltage)/1000.0;	// CPU voltage in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU Voltage in V : %f \n",cpuvoltageV);
+
+				float cpuvoltageW = atoi(cpu_power)/1000.0;	// CPU power in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU power in W : %f \n",cpuvoltageW);
+
+			printf("\n\t\t PMU EVENT DATA TRANSFER\n");
+	char a[15][15];
+int i;
+
+FILE *jpp = fopen("config_read_hw_events.txt","r");
+for(i=0; !feof(jpp);i++){
+fscanf(jpp,"%s",&a[i]);
+
+}
+fclose(jpp);
+
+printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			cl_log = fopen("data_store.dat", "a");
+
+			fprintf(cl_log,"1\tcanneal\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			fflush(fp_log);
+
+}
+
+
 void data_retrieval_dedup(){
 
 printf("\n\t\t -------------------now in data_retrieval_dedup-------------------\n");
@@ -561,6 +697,74 @@ printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 }
 
 
+void data_retrieval_fluidanimate(){
+
+printf("\n\t\t -------------------now in data_retrieval_fluidanimate-------------------\n");
+
+	char a57freq[100];
+	char a57temp[100];
+	char a57bench[100];
+	char cpu_voltage[100];
+	char cpu_power[100];
+			
+			FILE *rate = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq","r");				// add path to the sysfs file to read the CPU clock
+			FILE *voltage = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage2_input","r");		// add path to the sysfs file to read CPU voltage
+			FILE *temp = fopen("/sys/devices/virtual/thermal/thermal_zone1/temp","r");					// add path to the sysfs file to read the CPU temperature
+			FILE *power = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power2_input","r");
+			
+
+			size_t elements_freq = fread(a57freq,1,20,rate);
+		
+			strtok(a57freq,"\n");
+
+			size_t elements_temp = fread(a57temp,1,20,temp);
+			strtok(a57temp,"\n");
+
+			size_t elements_volt = fread(cpu_voltage,1,20,voltage);
+			strtok(cpu_voltage,"\n");
+
+			size_t elements_power = fread(cpu_power,1,20,power);
+			strtok(cpu_power,"\n");
+			
+			fclose(rate);
+			fclose(temp);
+			fclose(voltage);
+			fclose(power);	
+	
+				int cpufreqMHz = atoi(a57freq)/1000;		// CPU freq in MHz
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU freq in MHz : %d \n",cpufreqMHz);
+
+				int cputempdeg = atoi(a57temp)/1000;		// CPU temp in degrees
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU temp in degrees : %d \n",cputempdeg);
+
+				float cpuvoltageV = atoi(cpu_voltage)/1000.0;	// CPU voltage in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU Voltage in V : %f \n",cpuvoltageV);
+
+				float cpuvoltageW = atoi(cpu_power)/1000.0;	// CPU power in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU power in W : %f \n",cpuvoltageW);
+
+			printf("\n\t\t PMU EVENT DATA TRANSFER\n");
+	char a[15][15];
+int i;
+
+FILE *jpp = fopen("config_read_hw_events.txt","r");
+for(i=0; !feof(jpp);i++){
+fscanf(jpp,"%s",&a[i]);
+
+}
+fclose(jpp);
+
+printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			cl_log = fopen("data_store.dat", "a");
+
+			fprintf(cl_log,"1\tfluidanimate\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			fflush(fp_log);
+		
+}
+
+
 void data_retrieval_freqmine(){
 
 printf("\n\t\t -------------------now in data_retrieval_freqmine-------------------\n");
@@ -632,9 +836,9 @@ printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 }
 
 
-void data_retrieval_fluidanimate(){
+void data_retrieval_raytrace(){
 
-printf("\n\t\t -------------------now in data_retrieval_fluidanimate-------------------\n");
+printf("\n\t\t -------------------now in data_retrieval_raytrace-------------------\n");
 
 	char a57freq[100];
 	char a57temp[100];
@@ -693,7 +897,7 @@ printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 
 			cl_log = fopen("data_store.dat", "a");
 
-			fprintf(cl_log,"1\tfluidanimate\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+			fprintf(cl_log,"1\traytrace\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
 
 			fflush(fp_log);
 		
@@ -762,6 +966,210 @@ printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 			cl_log = fopen("data_store.dat", "a");
 
 			fprintf(cl_log,"1\tstreamcluster\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			fflush(fp_log);
+
+}
+
+
+void data_retrieval_swaptions(){
+
+printf("\n\t\t -------------------now in data_retrieval_swaptions-------------------\n");
+
+	char a57freq[100];
+	char a57temp[100];
+	char a57bench[100];
+	char cpu_voltage[100];
+	char cpu_power[100];
+			
+			FILE *rate = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq","r");				// add path to the sysfs file to read the CPU clock
+			FILE *voltage = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage2_input","r");		// add path to the sysfs file to read CPU voltage
+			FILE *temp = fopen("/sys/devices/virtual/thermal/thermal_zone1/temp","r");					// add path to the sysfs file to read the CPU temperature
+			FILE *power = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power2_input","r");
+			
+
+			size_t elements_freq = fread(a57freq,1,20,rate);
+		
+			strtok(a57freq,"\n");
+
+			size_t elements_temp = fread(a57temp,1,20,temp);
+			strtok(a57temp,"\n");
+
+			size_t elements_volt = fread(cpu_voltage,1,20,voltage);
+			strtok(cpu_voltage,"\n");
+
+			size_t elements_power = fread(cpu_power,1,20,power);
+			strtok(cpu_power,"\n");
+			
+			fclose(rate);
+			fclose(temp);
+			fclose(voltage);
+			fclose(power);	
+	
+				int cpufreqMHz = atoi(a57freq)/1000;		// CPU freq in MHz
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU freq in MHz : %d \n",cpufreqMHz);
+
+				int cputempdeg = atoi(a57temp)/1000;		// CPU temp in degrees
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU temp in degrees : %d \n",cputempdeg);
+
+				float cpuvoltageV = atoi(cpu_voltage)/1000.0;	// CPU voltage in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU Voltage in V : %f \n",cpuvoltageV);
+
+				float cpuvoltageW = atoi(cpu_power)/1000.0;	// CPU power in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU power in W : %f \n",cpuvoltageW);
+
+			printf("\n\t\t PMU EVENT DATA TRANSFER\n");
+	char a[15][15];
+int i;
+
+FILE *jpp = fopen("config_read_hw_events.txt","r");
+for(i=0; !feof(jpp);i++){
+fscanf(jpp,"%s",&a[i]);
+
+}
+fclose(jpp);
+
+printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			cl_log = fopen("data_store.dat", "a");
+
+			fprintf(cl_log,"1\tswaptions\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			fflush(fp_log);
+
+}
+
+
+void data_retrieval_vips(){
+
+printf("\n\t\t -------------------now in data_retrieval_vips-------------------\n");
+
+	char a57freq[100];
+	char a57temp[100];
+	char a57bench[100];
+	char cpu_voltage[100];
+	char cpu_power[100];
+			
+			FILE *rate = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq","r");				// add path to the sysfs file to read the CPU clock
+			FILE *voltage = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage2_input","r");		// add path to the sysfs file to read CPU voltage
+			FILE *temp = fopen("/sys/devices/virtual/thermal/thermal_zone1/temp","r");					// add path to the sysfs file to read the CPU temperature
+			FILE *power = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power2_input","r");
+			
+
+			size_t elements_freq = fread(a57freq,1,20,rate);
+		
+			strtok(a57freq,"\n");
+
+			size_t elements_temp = fread(a57temp,1,20,temp);
+			strtok(a57temp,"\n");
+
+			size_t elements_volt = fread(cpu_voltage,1,20,voltage);
+			strtok(cpu_voltage,"\n");
+
+			size_t elements_power = fread(cpu_power,1,20,power);
+			strtok(cpu_power,"\n");
+			
+			fclose(rate);
+			fclose(temp);
+			fclose(voltage);
+			fclose(power);	
+	
+				int cpufreqMHz = atoi(a57freq)/1000;		// CPU freq in MHz
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU freq in MHz : %d \n",cpufreqMHz);
+
+				int cputempdeg = atoi(a57temp)/1000;		// CPU temp in degrees
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU temp in degrees : %d \n",cputempdeg);
+
+				float cpuvoltageV = atoi(cpu_voltage)/1000.0;	// CPU voltage in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU Voltage in V : %f \n",cpuvoltageV);
+
+				float cpuvoltageW = atoi(cpu_power)/1000.0;	// CPU power in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU power in W : %f \n",cpuvoltageW);
+
+			printf("\n\t\t PMU EVENT DATA TRANSFER\n");
+	char a[15][15];
+int i;
+
+FILE *jpp = fopen("config_read_hw_events.txt","r");
+for(i=0; !feof(jpp);i++){
+fscanf(jpp,"%s",&a[i]);
+
+}
+fclose(jpp);
+
+printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			cl_log = fopen("data_store.dat", "a");
+
+			fprintf(cl_log,"1\tvips\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			fflush(fp_log);
+
+}
+
+
+void data_retrieval_x264(){
+
+printf("\n\t\t -------------------now in data_retrieval_x264-------------------\n");
+
+	char a57freq[100];
+	char a57temp[100];
+	char a57bench[100];
+	char cpu_voltage[100];
+	char cpu_power[100];
+			
+			FILE *rate = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq","r");				// add path to the sysfs file to read the CPU clock
+			FILE *voltage = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage2_input","r");		// add path to the sysfs file to read CPU voltage
+			FILE *temp = fopen("/sys/devices/virtual/thermal/thermal_zone1/temp","r");					// add path to the sysfs file to read the CPU temperature
+			FILE *power = fopen("/sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power2_input","r");
+			
+
+			size_t elements_freq = fread(a57freq,1,20,rate);
+		
+			strtok(a57freq,"\n");
+
+			size_t elements_temp = fread(a57temp,1,20,temp);
+			strtok(a57temp,"\n");
+
+			size_t elements_volt = fread(cpu_voltage,1,20,voltage);
+			strtok(cpu_voltage,"\n");
+
+			size_t elements_power = fread(cpu_power,1,20,power);
+			strtok(cpu_power,"\n");
+			
+			fclose(rate);
+			fclose(temp);
+			fclose(voltage);
+			fclose(power);	
+	
+				int cpufreqMHz = atoi(a57freq)/1000;		// CPU freq in MHz
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU freq in MHz : %d \n",cpufreqMHz);
+
+				int cputempdeg = atoi(a57temp)/1000;		// CPU temp in degrees
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU temp in degrees : %d \n",cputempdeg);
+
+				float cpuvoltageV = atoi(cpu_voltage)/1000.0;	// CPU voltage in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU Voltage in V : %f \n",cpuvoltageV);
+
+				float cpuvoltageW = atoi(cpu_power)/1000.0;	// CPU power in Volt
+				printf("\t measure_cpu_pow.c::a57_read_samples: CPU power in W : %f \n",cpuvoltageW);
+
+			printf("\n\t\t PMU EVENT DATA TRANSFER\n");
+	char a[15][15];
+int i;
+
+FILE *jpp = fopen("config_read_hw_events.txt","r");
+for(i=0; !feof(jpp);i++){
+fscanf(jpp,"%s",&a[i]);
+
+}
+fclose(jpp);
+
+printf("%s %s %s %s %s %s %s %s\n",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+
+			cl_log = fopen("data_store.dat", "a");
+
+			fprintf(cl_log,"1\tx264\t1\t%d\t%d\t%f\t%f\t%s\t%s\t%s\t%s\t%s\t%s\t\n", cpufreqMHz , cputempdeg,cpuvoltageV,cpuvoltageW,a[2],a[3],a[4],a[5],a[6],a[7]);
 
 			fflush(fp_log);
 
