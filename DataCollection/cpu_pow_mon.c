@@ -82,31 +82,6 @@ printf("\n\t\t -------------------bodytrack-------------------\n");
 		
 	}
 
-
-printf("\n\t\t -------------------canneal-------------------\n");
-	for(int cfreq=0;cfreq<39;cfreq++)		// 13 frequencies in all : ALL trials
-	{
-		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
-
-		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
-		system(cmdbuf);
-		
-
-		printf("\tLaunching config_canneal.sh...\n");
-		system("./config_canneal.sh"); 		//collect the PMU events
-		printf("\tFinished config_canneal.sh...\n");
-
-		printf("\tLaunching PMU event transfer...\n");
-		config_transferPMUdata(); 		//transfer PMU events data
-		printf("\tFinished PMU event transfer...\n");
-
-		printf("\tLaunching data_retrieval_canneal...\n");
-		data_retrieval_canneal(); 		//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_canneal...\n");
-
-		
-	}
-
 	
 printf("\n\t\t -------------------dedup-------------------\n");
 	for(int cfreq=0;cfreq<39;cfreq++)		// 13 frequencies in all : ALL trials
@@ -128,31 +103,6 @@ printf("\n\t\t -------------------dedup-------------------\n");
 		printf("\tLaunching data_retrieval_dedup...\n");
 		data_retrieval_dedup(); 		//collection the data of CPU freq,voltage,power,temperature
 		printf("\tFinished data_retrieval_dedup...\n");
-
-		
-	}
-
-
-printf("\n\t\t -------------------facesim-------------------\n");
-for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
-	{
-		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
-
-		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
-		system(cmdbuf);
-		
-
-		printf("\tLaunching config_facesim.sh...\n");
-		system("./config_facesim.sh"); 	//collect the PMU events
-		printf("\tFinished config_facesim.sh...\n");
-
-		printf("\tLaunching PMU event transfer...\n");
-		config_transferPMUdata(); 		//transfer PMU events data
-		printf("\tFinished PMU event transfer...\n");
-
-		printf("\tLaunching data_retrieval_facesim.fft...\n");
-		data_retrieval_facesim(); 		//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_facesim...\n");
 
 		
 	}
@@ -233,31 +183,6 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	}
 
 
-printf("\n\t\t -------------------raytrace-------------------\n");
-for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
-	{
-		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
-
-		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
-		system(cmdbuf);
-		
-
-		printf("\tLaunching config_raytrace.sh...\n");
-		system("./config_raytrace.sh"); 	//collect the PMU events
-		printf("\tFinished config_raytrace.sh...\n");
-
-		printf("\tLaunching PMU event transfer...\n");
-		config_transferPMUdata(); 		//transfer PMU events data
-		printf("\tFinished PMU event transfer...\n");
-
-		printf("\tLaunching data_retrieval_raytrace...\n");
-		data_retrieval_raytrace(); 		//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_raytrace...\n");
-
-		
-	}
-
-
 printf("\n\t\t -------------------streamcluster-------------------\n");
 for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 	{
@@ -278,31 +203,6 @@ for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
 		printf("\tLaunching data_retrieval_streamcluster...\n");
 		data_retrieval_streamcluster();	 	//collection the data of CPU freq,voltage,power,temperature
 		printf("\tFinished data_retrieval_streamcluster...\n");
-
-		
-	}
-
-
-printf("\n\t\t -------------------swaptions-------------------\n");
-for(int cfreq=0;cfreq<39;cfreq++)			// 13 frequencies in all : ALL trials
-	{
-		printf("\t cpu_pow_mon.c::main() : Setting CPU frequency (kHz) to %d\n",freqs[cfreq]);
-
-		snprintf(cmdbuf,sizeof(cmdbuf),"./cpu_clocks.sh --set %d",freqs[cfreq]);
-		system(cmdbuf);
-		
-
-		printf("\tLaunching config_swaptions.sh...\n");
-		system("./config_swaptions.sh"); 	//collect the PMU events
-		printf("\tFinished config_swaptions.sh...\n");
-
-		printf("\tLaunching PMU event transfer...\n");
-		config_transferPMUdata(); 		//transfer PMU events data
-		printf("\tFinished PMU event transfer...\n");
-
-		printf("\tLaunching data_retrieval_swaptions...\n");
-		data_retrieval_swaptions();	 	//collection the data of CPU freq,voltage,power,temperature
-		printf("\tFinished data_retrieval_swaptions...\n");
 
 		
 	}
