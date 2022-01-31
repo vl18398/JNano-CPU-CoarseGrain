@@ -4,34 +4,23 @@
 *******************************************************************************
 # Step 1: Data Collection (Requires NVIDIA Jetson Nano)
 1)  Go to DataCollection/
-2)  Run the makefile to compile the files: 
+2)  In each of the config_*benchmarkname* files, change the register address values to correspond to the target PMU group
+3)  In line 30 of cpu_pow_mon.c, change the PMU event names to correlate to the desired PMU register addresses
+4)  Run the makefile to compile the files: 
             make -f Makefile_cpu cpu_pow
 4)  Run executable to start the benchmark run and collect data: 
             sudo ./pmon_cpu
 5)  Raw data file is dumped: 
             data_store.dat
+6)  Repeat this process until all 14 PMU event groups capture all 84 PMU events (14*6)
 *******************************************************************************
 
 # Step 2: Post Processing (Offline)
-1)  Transfer the raw data file (.dat) obtained in step 1 onto another machine 
-    which can run python3.6 and bash scripts.
-2)  Go to PostProcessing/
-3)  Run the step which splits the .dat file into individual BM+Freq logs using: 
-            python3.6 splitter_freq.py data_store.dat
-4)  Merge the files obtained in step-3 into a global log using: 	
-	    python3.6 global_merger_nvidia.py
-6)  To complete steps 3 & 4, there are separate targets within the
-    Makefile_split_and_merge_new such as: 
-            make -f Makefile_split_and_merge_new dir_0_cBenchtrain. 
-    This will create a separate directory called run_0_cBenchtrain after running 
-    steps 3 & 4.
-6)  Run step 5 for all the required BM logs.
-7)  Concatenate merged logs obtained for training set (cBenchtrain) and test
-    set(cBenchtest) using one of the targets in the Makefile_split_and_merge_new as:
-            make -f Makefile_split_and_merge_new create_run_0_dir
-8)  The concatenated file is fed to the script in the modeling and validation
-    step.
-
+1)  In order to concatenate all of the PMU events into one singular .dat file, each of the 14 data files must be combined
+**USING MS EXCEL**
+2)  Split each .dat file for each PMU group into files for each benchmark
+3)  Concatenate all of the PMU events for a target benchmark into one file, and take the average of all the physical sensor recordings
+4)  Concatenate all separate benchmark files to create a master file
 ***********************************************************************************
 
 # Step 3: Power Modelling and Validation
