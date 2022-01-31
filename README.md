@@ -17,7 +17,7 @@
 
 # Step 2: Post Processing (Offline)
 1)  In order to concatenate all of the PMU events into one singular .dat file, each of the 14 data files must be combined
-**USING MS EXCEL**
+\n**USING MS EXCEL**
 2)  Split each .dat file for each PMU group into files for each benchmark
 3)  Concatenate all of the PMU events for a target benchmark into one file, and take the average of all the physical sensor recordings
 4)  Concatenate all separate benchmark files to create a master file
