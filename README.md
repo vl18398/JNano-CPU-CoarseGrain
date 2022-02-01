@@ -28,6 +28,7 @@
 # Step 3: Power Modelling and Validation
 1)  Go to ModellingAndValidation/
 2)  Ensure the following files are present in the directory:
+	   benchmark_split.txt
 	   build_model.m,
 	   load_build_model.m,
 	   octave_makemodel.sh (Make it executable using chmod u+x
