@@ -1,0 +1,10 @@
+#Train Set	Test Set
+blackscholes	blackscholes
+bodytrack	bodytrack
+dedup	dedup
+ferret	ferret
+fluidanimate	fluidanimate
+freqmine	freqmine
+streamcluster	streamcluster
+vips	vips
+x264	x264
