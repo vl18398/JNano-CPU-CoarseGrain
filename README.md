@@ -1,5 +1,5 @@
 # JNano-CPU-CoarseGrain
-# Power Modelling of ARM Cortex-A57 CPU on NVIDIA Jetson Nano
+# Energy Modelling of ARM Cortex-A57 CPU on NVIDIA Jetson Nano
 
 *******************************************************************************
 # Step 1: Data Collection (Requires NVIDIA Jetson Nano)
@@ -8,11 +8,11 @@
 3)  In line 30 of cpu_pow_mon.c, change the PMU event names to correlate to the desired PMU register addresses
 4)  Run the makefile to compile the files: 
             make -f Makefile_cpu cpu_pow
-4)  Run executable to start the benchmark run and collect data: 
+5)  Run executable to start the benchmark run and collect data: 
             sudo ./pmon_cpu
-5)  Raw data file is dumped: 
+6)  Raw data file is dumped: 
             data_store.dat
-6)  Repeat this process until all 14 PMU event groups capture all 84 PMU events (14*6)
+7)  Repeat this process until all 14 PMU event groups capture all 84 PMU events (14*6)
 *******************************************************************************
 
 # Step 2: Post Processing (Offline)
@@ -22,7 +22,7 @@
 
 2)  Split each .dat file for each PMU group into files for each benchmark
 3)  Concatenate all of the PMU events for a target benchmark into one file, and take the average of all the physical sensor recordings
-4)  Concatenate all separate benchmark files to create a master file, power_measurement_merged_global.txt
+4)  Concatenate all separate benchmark files to create a master file, coarse-grain-CPU-data-parsec.txt
 ***********************************************************************************
 
 # Step 3: Power Modelling and Validation
