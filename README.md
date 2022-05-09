@@ -25,7 +25,7 @@
 4)  Concatenate all separate benchmark files to create a master file, coarse-grain-CPU-data-parsec.txt
 ***********************************************************************************
 
-# Step 3: Power Modelling and Validation
+# Step 3: Energy Modelling and Validation
 1)  Go to ModellingAndValidation/
 2)  Ensure the following files are present in the directory:
 	   benchmark_split.txt
@@ -34,7 +34,7 @@
 	   octave_makemodel.sh (Make it executable using chmod u+x
     octave_makemodel.sh), and
 	   coarse-grain-CPU-data-parsec.txt
-3)  Generate and Validate the power model by launching the command: 
+3)  Generate and Validate the energy model by launching the command: 
             make make_cpu_model
 4)  The model details can be output into an output log using the -s option
 5)  Use ./octave_makemodel.sh -h to open the help menu
